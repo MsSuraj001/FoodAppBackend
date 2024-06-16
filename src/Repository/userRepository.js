@@ -1,5 +1,5 @@
 const  User  = require('../Schema/userSchema');
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 
 async function findUserOne(parameters){
     try{

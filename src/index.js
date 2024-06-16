@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.text());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}));
 
 // this is the user Routers
 app.use('/user', routes);
