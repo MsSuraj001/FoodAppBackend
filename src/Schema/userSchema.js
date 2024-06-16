@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
     firstName: {
@@ -15,7 +16,7 @@ const UserSchema = new mongoose.Schema({
         required : true,
     },
     mobileNumber :{
-        type: Number,
+        type: String,
         minlength : [10, "Mobile no. is must be minimum 10 digit"],
         required : true,
         unique: true
@@ -32,10 +33,15 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         minlength : [8, "Password is most required to 8 digit"]
     }
+}, {timestamps: true, timeseries: true});
+
+
+UserSchema.pre('save', async function(){
+    // here u can modify your user before it is seved in mongodb
+    this.hashedpassword =await bcrypt.hash(this.password, 10);
+    this.password = this.hashedpassword;
 })
 
 const User = mongoose.model("Users", UserSchema);
 
-module.exports = {
-    User
-}
+module.exports =  User ;

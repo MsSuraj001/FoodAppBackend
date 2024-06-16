@@ -5,7 +5,7 @@ async function registerUser(userDetails){
     // 1. We need to check if the user with this email and mobile number already exists or not
     const user = await findUserOne({
         email : userDetails.email,
-        mobileNuber : userDetails.mobileNumber
+        mobileNumber : userDetails.mobileNumber
     });
 
     if(user){

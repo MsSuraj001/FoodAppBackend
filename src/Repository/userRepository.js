@@ -1,9 +1,11 @@
-const User = require('../Schema/userSchema')
+const  User  = require('../Schema/userSchema');
+const mongoose = require('mongoose')
 
 async function findUserOne(parameters){
     try{
         // console.log("find the user one");
         const response = await User.findOne({ ...parameters });
+        //console.log(response);  // null
         return response;
     }catch(error){
         console.log("this is the find user time error");
