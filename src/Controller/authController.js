@@ -6,6 +6,12 @@ async function logIn(req, res){
         const loginPayload = req.body;
         // auth service
         const response = await loginUser(loginPayload);
+        
+        // res.cookie("authToken", response, {
+        //     httpOnly: true,
+        //     secure: false,
+        //     maxAge: 7 * 24 * 60 * 60 * 1000
+        // });
 
         return res.status(201).json({
             success: true,
