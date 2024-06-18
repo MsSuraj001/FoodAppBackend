@@ -7,16 +7,16 @@ async function logIn(req, res){
         // auth service
         const response = await loginUser(loginPayload);
         
-        // res.cookie("authToken", response, {
-        //     httpOnly: true,
-        //     secure: false,
-        //     maxAge: 7 * 24 * 60 * 60 * 1000
-        // });
+        res.cookie("authToken", response, {
+            httpOnly: true,
+            secure: false,
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
 
         return res.status(201).json({
             success: true,
             message: "Successfully lonIN User",
-            data : response,
+            data : {},
             error: {}
         })
     }catch(error){

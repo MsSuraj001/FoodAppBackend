@@ -4,9 +4,11 @@ const { connectedDB } = require('./Config/dbConfig');
 const routes = require('./Router/userRouter');
 const cartRouter = require('./Router/cartRouter');
 const authRouter = require('./Router/authRoute');
+const cookieParser = require('cookie-parser');
+const { isLoggedIn } = require('./Validations/authValidator');
 
 const app = express();
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({extended: true}));
@@ -19,9 +21,10 @@ app.use('/cart', cartRouter);
 
 app.use('/auth', authRouter);
 
-app.post('/pack', (req, res)=>{
+app.get('/pack',isLoggedIn, (req, res)=>{
     res.json({message: "this routs is pack"});
     console.log(req.body);
+    console.log(req.cookies);
 })
 
 app.listen(serverConfig.PORT, async ()=>{
