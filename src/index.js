@@ -6,6 +6,11 @@ const cartRouter = require('./Router/cartRouter');
 const authRouter = require('./Router/authRoute');
 const cookieParser = require('cookie-parser');
 const { isLoggedIn } = require('./Validations/authValidator');
+const uploader = require('./Middleware/multerMiddleware');
+const cloudinary = require('./Config/cloudinaryConfig');
+const fs = require('fs/promises');
+const productRouter = require('./Router/productRoute');
+
 
 const app = express();
 app.use(cookieParser());
@@ -20,6 +25,17 @@ app.use('/user', routes);
 app.use('/cart', cartRouter);
 
 app.use('/auth', authRouter);
+
+// this is the product routes
+app.use('/products', productRouter);
+
+app.post('/photo', uploader.single('incomingFile'), async (req, res)=>{
+    console.log(req.file);
+    const result = await cloudinary.uploader.upload(req.file.path)
+    console.log("result from cloudinary", result);
+    await fs.unlink(req.file.path);
+    return res.json({message : "ok"})
+});
 
 app.get('/pack',isLoggedIn, (req, res)=>{
     res.json({message: "this routs is pack"});
