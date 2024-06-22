@@ -32,6 +32,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true,
         minlength : [8, "Password is most required to 8 digit"]
+    },
+    role : {
+        type : String,
+        enum : ["USER", "ADMIN"],
+        default : "USER",
     }
 }, {timestamps: true, timeseries: true});
 

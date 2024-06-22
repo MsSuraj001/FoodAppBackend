@@ -13,10 +13,10 @@ async function logIn(req, res){
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
             message: "Successfully lonIN User",
-            data : {},
+            data : response,
             error: {}
         })
     }catch(error){
@@ -24,7 +24,7 @@ async function logIn(req, res){
             success: false,
             data: {},
             message: error.message,
-            error : error
+            error : error,
         })
     }
 }
