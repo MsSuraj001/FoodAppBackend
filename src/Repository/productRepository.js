@@ -7,7 +7,7 @@ async function createProduct(productDetails){
         const response = await Product.create(productDetails);
         return response;
     }catch(error){
-        if(error.name === 'MongooseError'){
+        if(error.name === 'ValidationError'){
             const errorMessageList = Object.keys(error.errors).map((property)=>{
                 return error.errors[property].message;
             });
