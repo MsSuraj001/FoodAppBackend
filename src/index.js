@@ -10,6 +10,7 @@ const uploader = require('./Middleware/multerMiddleware');
 const cloudinary = require('./Config/cloudinaryConfig');
 const fs = require('fs/promises');
 const productRouter = require('./Router/productRoute');
+const orderRouter = require('./Router/orderRoutes');
 
 
 const app = express();
@@ -28,6 +29,9 @@ app.use('/auth', authRouter);
 
 // this is the product routes
 app.use('/products', productRouter);
+
+//this is the order routes
+app.use('/orders', orderRouter)
 
 app.post('/photo', uploader.single('incomingFile'), async (req, res)=>{
     console.log(req.file);
