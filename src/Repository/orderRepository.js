@@ -1,4 +1,5 @@
 const Order = require("../Schema/orderSchema");
+const InternalServerError = require("../utils/internalServerError");
 
 
 async function createNewOrder(orderDetails){
@@ -17,6 +18,41 @@ async function createNewOrder(orderDetails){
     }
 }
 
+async function getOrdersByUserId(userId){
+    try{
+        const orders = await Order.find({ user : userId }).populate('items.product');
+        return orders;
+    }catch(error){
+        console.log(error);
+        throw new InternalServerError()
+    }
+}
+
+
+async function getOrderById(orderId){
+    try{
+        const order = await Order.findById(orderId).populate('items.product');
+        return order;
+    }catch(error){
+        console.log(error);
+        throw new InternalServerError()
+    }
+}
+
+async function updateOrderStatus(orderId, status){
+    try {
+        const order = await Order.findByIdAndUpdate(orderId, {status : status}, {new : true});
+        return order;
+    } catch (error) {
+        console.log(error);
+        throw new InternalServerError()
+    }
+}
+
+
 module.exports = {
-    createNewOrder
+    createNewOrder,
+    getOrdersByUserId,
+    getOrderById,
+    updateOrderStatus
 }

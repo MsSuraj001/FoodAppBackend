@@ -29,4 +29,17 @@ async function logIn(req, res){
     }
 }
 
-module.exports = logIn;
+async function logout(req, res){
+    res.cookie("authToken", null);
+    return res.status(200).json({
+        success : true,
+        message : "LogOut Successfull",
+        error : {},
+        data : {}
+    });
+}
+
+module.exports = {
+    logIn,
+    logout,
+}
