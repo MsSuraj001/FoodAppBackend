@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
     lastName: {
         type : String,
         minlength: [5, "lastName is required to minlength 5 letter"],
-        required : true,
+        lowercase : true
     },
     mobileNumber :{
         type: String,
@@ -38,10 +38,10 @@ const UserSchema = new mongoose.Schema({
         enum : ["USER", "ADMIN"],
         default : "USER",
     },
-    address : {
-        type : String,
+    // address : {
+    //     type : String,
         
-    }
+    // }
 }, {timestamps: true, timeseries: true});
 
 

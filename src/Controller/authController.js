@@ -7,7 +7,7 @@ async function logIn(req, res){
         // auth service
         const response = await loginUser(loginPayload);
         
-        res.cookie("authToken", response, {
+        res.cookie("authToken", response.token, {
             httpOnly: true,
             secure: false,
             maxAge: 7 * 24 * 60 * 60 * 1000
@@ -16,7 +16,10 @@ async function logIn(req, res){
         return res.status(200).json({
             success: true,
             message: "Successfully lonIN User",
-            data : response,
+            data : {
+                userRole : response.userRole,
+                userData : response.userData
+            },
             error: {}
         })
     }catch(error){
@@ -30,7 +33,8 @@ async function logIn(req, res){
 }
 
 async function logout(req, res){
-    res.cookie("authToken", null);
+    console.log("cookies from frontend", req.cookies)
+    // res.cookie("authToken", null);
     return res.status(200).json({
         success : true,
         message : "LogOut Successfull",
