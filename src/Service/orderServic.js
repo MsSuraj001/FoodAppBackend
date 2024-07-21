@@ -11,7 +11,7 @@ async function createOrder(userId, paymentMethod) {
     
     const cart = await getCartByUserId(userId);
     const user = await findUserOne({ _id: cart.user});
-    // console.log(cart);
+    // console.log(cart);       // this is the work 
     // console.log(user);
     if(!cart) {
         throw new NotFoundError("Cart");
@@ -52,6 +52,7 @@ async function createOrder(userId, paymentMethod) {
 
 async function getAllOrderCreateByUser(userId){
     const orders = await getOrdersByUserId(userId);
+    console.log(orders);   // this is the empty
     if(!orders){
         throw new NotFoundError("Orders");
     }

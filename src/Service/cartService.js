@@ -65,9 +65,9 @@ async function modifyToCart(userId, productId, shouldAdd = true){
 
     await cart.save();
 
-    // product.quantity -= 1;
+    product.quantity -= 1;
 
-    // await product.save();
+    await product.save();
 
     return cart;
 
