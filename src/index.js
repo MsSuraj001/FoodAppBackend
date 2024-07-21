@@ -17,7 +17,8 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: serverConfig.FRONTEND_URL,
+    origin: 'https://wings-pizza-gpj.netlify.app/',
+    // origin: http://localhost:5173/,
     credentials : true,
     // optionsSuccessStatus: 200,
 }));
