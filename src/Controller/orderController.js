@@ -62,6 +62,7 @@ async function getAllOrdersByUsers(req, res){
 async function getOrder(req, res){
     try {
         const order = await getAllOrderCreateByUser(req.params.orderId);
+        console.log(order);   // this is the empty
         return res.status(201).json({
             success: true,
             message : "Successfully fetched the orders",

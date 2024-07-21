@@ -9,6 +9,7 @@ async function logIn(req, res){
         
         res.cookie("authToken", response.token, {
             httpOnly: true,
+            sameSite : "lax",
             secure: false,
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
@@ -33,7 +34,7 @@ async function logIn(req, res){
 }
 
 async function logout(req, res){
-    console.log("cookies from frontend", req.cookies)
+    console.log("cookies from frontend", req.cookies)  // this is the work
     // res.cookie("authToken", null);
     return res.status(200).json({
         success : true,
