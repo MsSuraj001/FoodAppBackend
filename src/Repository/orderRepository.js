@@ -21,6 +21,7 @@ async function createNewOrder(orderDetails){
 async function getOrdersByUserId(userId){
     try{
         const orders = await Order.find({ user : userId }).populate('items.product');
+        console.log(orders);         // this is the empty
         return orders;
     }catch(error){
         console.log(error);
